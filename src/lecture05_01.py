@@ -32,13 +32,10 @@ def lecture05_01():
             b, g, r = google_img[y, x]
             # もし白色(255,255,255)だったら置き換える
             if (b, g, r) == (255, 255, 255):
-                tile_y = y % c_hight
-                tile_x = x % c_width
-                google_img[y, x] = capture_img[tile_y, tile_x]
+                pass
+                (b, g, r)=capture_img[y%480,x%640]
+                google_img[y, x]=(b, g, r)
 
     # 書き込み処理
-    output_dir = 'output_images'
-    # 合成した画像を保存
-    cv2.imwrite(os.path.join(output_dir, 'result_image.png'), google_img)
-    print(f"画像を {os.path.join(output_dir, 'result_image.png')} に保存しました。")
+    cv2.imwrite("output_images/lecture05_01_k24106.png",google_img)
 
