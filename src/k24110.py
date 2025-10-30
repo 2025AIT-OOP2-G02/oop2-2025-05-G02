@@ -10,9 +10,10 @@ def lecture05_01():
 
     # 画像をローカル変数に保存
     google_img : cv2.Mat = cv2.imread('images/google.png')
-    capture_img : cv2.Mat = cv2.imread('images/camera_capture.png') # 動作テスト用なので提出時にこの行を消すこと
-    # capture_img : cv2.Mat = "implement me"
-
+    capture_img = app.get_img()
+    if capture_img is None:
+        capture_img = cv2.imread('images/capture.png')
+    
     g_hight, g_width, g_channel = google_img.shape
     c_hight, c_width, c_channel = capture_img.shape
     print(google_img.shape)
@@ -20,11 +21,12 @@ def lecture05_01():
 
     for x in range(g_width):
         for y in range(g_hight):
-            g, b, r = google_img[y, x]
+            b, g, r = google_img[y, x]
             # もし白色(255,255,255)だったら置き換える
             if (b, g, r) == (255, 255, 255):
-                pass
-                #implement me
+                b2, g2, r2 = capture_img[y % c_hight, x % c_width]
+                google_img[y, x] = (b2, g2, r2)
+
 
     # 書き込み処理
-    # implement me
+    cv2.imwrite('output_images/lecture05_01_k24110.png', google_img)
