@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 from my_module.K21999.lecture05_camera_image_capture import MyVideoCapture
+import os
 
 def lecture05_01():
 
@@ -10,22 +11,34 @@ def lecture05_01():
 
     # 画像をローカル変数に保存
     google_img : cv2.Mat = cv2.imread('images/google.png')
-    capture_img : cv2.Mat = cv2.imread('images/camera_capture.png') # 動作テスト用なので提出時にこの行を消すこと
-    # capture_img : cv2.Mat = "implement me"
+    # capture_img : cv2.Mat = cv2.imread('images/camera_capture.png') # 動作テスト用なので提出時にこの行を消すこと
+    capture_img : cv2.Mat = app.get_img()
+
+    # エラーチェック
+    if google_img is None:
+        print("エラー: 'images/google.png' が読み込めません。")
+        return
+    if capture_img is None:
+        print("エラー: カメラから画像がキャプチャされませんでした。")
+        return
 
     g_hight, g_width, g_channel = google_img.shape
     c_hight, c_width, c_channel = capture_img.shape
     print(google_img.shape)
     print(capture_img.shape)
 
+    capture_img_resized = cv2.resize(capture_img, (g_width, g_hight))
+
     for x in range(g_width):
         for y in range(g_hight):
             g, b, r = google_img[y, x]
             # もし白色(255,255,255)だったら置き換える
             if (b, g, r) == (255, 255, 255):
-                pass
-                #implement me
+                google_img[y, x] = capture_img_resized[y, x]
 
     # 書き込み処理
-    # implement me
+    output_dir = 'output_images'
+    # 合成した画像を保存
+    cv2.imwrite(os.path.join(output_dir, 'result_image.png'), google_img)
+    print(f"画像を {os.path.join(output_dir, 'result_image.png')} に保存しました。")
 
