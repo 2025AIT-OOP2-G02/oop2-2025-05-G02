@@ -39,6 +39,6 @@ def lecture05_01():
     # 書き込み処理
     output_dir = 'output_images'
     # 合成した画像を保存
-    cv2.imwrite(os.path.join(output_dir, 'result_image.png'), google_img)
-    print(f"画像を {os.path.join(output_dir, 'result_image.png')} に保存しました。")
+    cv2.imwrite(os.path.join(output_dir, 'lecture05_01_k24012.png'), google_img)
+    print(f"画像を {os.path.join(output_dir, 'lecture05_01_k24012.png')} に保存しました。")
 
