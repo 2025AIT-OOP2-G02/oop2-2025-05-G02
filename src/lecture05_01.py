@@ -27,14 +27,14 @@ def lecture05_01():
     print(google_img.shape)
     print(capture_img.shape)
 
-    capture_img_resized = cv2.resize(capture_img, (g_width, g_hight))
-
     for x in range(g_width):
         for y in range(g_hight):
-            g, b, r = google_img[y, x]
+            b, g, r = google_img[y, x]
             # もし白色(255,255,255)だったら置き換える
             if (b, g, r) == (255, 255, 255):
-                google_img[y, x] = capture_img_resized[y, x]
+                tile_y = y % c_hight
+                tile_x = x % c_width
+                google_img[y, x] = capture_img[tile_y, tile_x]
 
     # 書き込み処理
     output_dir = 'output_images'
