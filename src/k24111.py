@@ -1,11 +1,9 @@
-import os
-import sys
 from typing import Optional
 
 import numpy as np
 import cv2
 from typing import Optional
-from my_module.k24111.lecture05_camera_image_capture import MyVideoCapture
+from my_module.K21999.lecture05_camera_image_capture import MyVideoCapture
 
 
 def lecture05_01_k24111():
